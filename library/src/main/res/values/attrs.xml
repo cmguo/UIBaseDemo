@@ -1,25 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="LoadingStyle" format="reference" />
-    <declare-styleable name="LoadingView">
-        <attr name="loading_view_size" format="dimension" />
-        <attr name="android:color" />
+    <declare-styleable name="CountDownTextView">
+        <attr name="preText" format="string" />
+        <attr name="afterText" format="string" />
+        <attr name="totalTime" format="integer" />
+        <attr name="unit" format="string" />
+        <attr name="enableColor" format="color" />
+        <attr name="disableColor" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="LoadingLayout">
-        <attr name="isFirstVisible" format="boolean" />
-    </declare-styleable>
+    <!--附带标签的EditText输入框-->
+    <declare-styleable name="LabelEditText">
 
-    <declare-styleable name="MultipleTextViewGroup">
-        <attr name="textWordMargin" format="dimension" />
-        <attr name="textLineMargin" format="dimension" />
-        <attr name="textBackground" format="reference" />
-        <attr name="textPaddingLeft" format="dimension" />
-        <attr name="textPaddingRight" format="dimension" />
-        <attr name="textPaddingTop" format="dimension" />
-        <attr name="textPaddingBottom" format="dimension" />
-        <attr name="overspread" format="boolean" />
-        <attr name="columnNum" format="integer" />
+        <attr name="labelPaddingHorizon" format="dimension" />
+        <attr name="labelPaddingVertical" format="dimension" />
+        <attr name="passwordEnable" format="boolean" />
+        <attr name="passwordToggleButtonEnable" format="boolean" />
+        <attr name="passwordVisibleDrawable" format="reference" />
+        <attr name="passwordInvisibleDrawable" format="reference" />
+        <attr name="labelDrawable" format="reference" />
+        <attr name="labelDrawablePadding" format="dimension" />
+        <attr name="labelEditPadding" format="dimension" />
+        <attr name="editRightPadding" format="dimension" />
+        <attr name="labelText" format="string" />
+        <attr name="labelTextColor" format="color" />
+        <attr name="labelTextSize" format="dimension" />
+        <attr name="labelWidth" format="dimension" />
+        <attr name="text" format="string" />
+        <attr name="textSize" format="dimension" />
+        <attr name="textColor" format="color" />
+        <attr name="hint" format="string" />
+        <attr name="hintTextColor" format="color" />
+        <attr name="maxLength" format="integer" />
+        <attr name="smsTextEnableColor" format="color" />
+        <attr name="smsTextDisableColor" format="color" />
+        <attr name="smsTotalTime" format="integer" />
+        <attr name="smsPreText" format="string" />
+        <attr name="smsAfterText" format="string" />
+        <attr name="smsCodeEnable" format="boolean" />
+        <attr name="imageCodeEnable" format="boolean" />
+        <attr name="errorMessage" format="string" />
+        <attr name="errorTextColor" format="color" />
+        <attr name="errorTextSize" format="dimension" />
+        <attr name="bottomLineEnable" format="boolean" />
+        <attr name="bottomLineHeight" format="dimension" />
+        <attr name="bottomLineBgColor" format="color" />
+        <attr name="errorViewTopMargin" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="FloatInputLayout">
@@ -30,7 +56,7 @@
         <attr name="textSizeHint" format="dimension" />
         <attr name="textHintPadding" format="dimension" />
         <attr name="counterFlowTextColor" format="color" />
-        <attr name="counter_TextColor" format="color" />
+        <attr name="counterTextColor2" format="color" />
         <attr name="counterTextSize" format="dimension" />
         <attr name="counterEnabled" format="boolean" />
         <attr name="maxCounter" format="integer" />
@@ -39,10 +65,32 @@
         <attr name="floatInputErrorTextColor" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="voicePlayingIconAttr">
-        <attr name="pointer_color" format="color" />
-        <attr name="pointer_num" format="integer" />
-        <attr name="pointer_width" format="float" />
-        <attr name="pointer_speed" format="integer" />
+    <declare-styleable name="LabelTextView">
+        <attr name="rightView">
+            <flag name="textView" value="1" />
+            <flag name="imageView" value="2" />
+            <flag name="badgeView" value="4" />
+            <flag name="arrowView" value="8" />
+        </attr>
+        <attr name="mainTitle" format="string" />
+        <attr name="mainTitleTextSize" format="dimension" />
+        <attr name="mainTitleTextColor" format="color" />
+        <attr name="rightTextContent" format="string" />
+        <attr name="rightTextViewSize" format="dimension" />
+        <attr name="rightTextViewColor" format="color" />
+        <attr name="subTitle" format="string" />
+        <attr name="subtitleTextSize" format="dimension" />
+        <attr name="subtitleTextColor" format="color" />
+        <attr name="mainAndSubTitlePadding" format="dimension" />
+        <attr name="paddingHorizontal" format="dimension" />
+        <attr name="paddingVertical" format="dimension" />
+        <attr name="internalViewPadding" format="dimension" />
+        <attr name="leftIconDrawable" format="reference" />
+        <attr name="rightImageDrawable" format="reference" />
+        <attr name="rightIconDrawable" format="reference" />
+        <attr name="labelBottomLineEnable" format="boolean" />
+        <attr name="labelBottomLineHeight" format="dimension" />
+        <attr name="labelBottomLineColor" format="color" />
+        <attr name="labelBottomLinePaddingEnable" format="boolean" />
     </declare-styleable>
 </resources>

@@ -1,16 +1,15 @@
 package com.xhb.uibase.demo.core;
 
 import android.content.Context;
-import android.util.Log;
+
+import androidx.core.content.ContextCompat;
 
 import com.xhb.uibase.R;
 
-import java.lang.reflect.Field;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.regex.Pattern;
 
-public class Colors {
+public class Colors extends Resources {
 
     private static final String TAG = "Colors";
 
@@ -28,17 +27,9 @@ public class Colors {
     }
 
     public static Map<String, Integer> getColors(Context context, Class<?> clazz, Pattern pattern) {
-        Map<String, Integer> colors = new TreeMap<>();
-        try {
-            for (Field f : clazz.getDeclaredFields()) {
-                if (pattern == null || pattern.matcher(f.getName()).find()) {
-                    Log.d(TAG, f.getName());
-                    int id = (Integer) f.get(clazz);
-                    colors.put(f.getName(), SkinManager.getColor(context, id));
-                }
-            }
-        } catch (IllegalAccessException e) {
-            Log.w(TAG, "", e);
+        Map<String, Integer> colors = getResources(context, clazz, pattern);
+        for (Map.Entry<String, Integer> entry : colors.entrySet()) {
+            entry.setValue(ContextCompat.getColor(context, entry.getValue()));
         }
         return colors;
     }
@@ -52,11 +43,11 @@ public class Colors {
     }
 
     public static void update(Context context, Map<String, Integer> colors) {
-        Class clazz = R.color.class;
+        Class<?> clazz = R.color.class;
         try {
             for (Map.Entry<String, Integer> e : colors.entrySet()) {
                 int id = (Integer) clazz.getDeclaredField(e.getKey()).get(clazz);
-                e.setValue(SkinManager.getColor(context, id));
+                e.setValue(ContextCompat.getColor(context, id));
             }
         } catch (Throwable e) {
         }

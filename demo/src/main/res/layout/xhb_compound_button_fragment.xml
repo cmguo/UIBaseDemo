@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.xhb.uibase.demo.components.basic.XHBCompoundButtonFragment.Model" />
+
+        <import type="com.xhb.uibase.demo.components.basic.XHBCompoundButtonFragment.Styles" />
+
+        <import type="com.xhb.uibase.demo.components.basic.XHBCompoundButtonFragment" />
+
+        <variable
+            name="fragment"
+            type="XHBCompoundButtonFragment" />
+
+        <variable
+            name="model"
+            type="Model" />
+
+        <variable
+            name="styles"
+            type="Styles" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/xhb_component_compound_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".TestComponent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/compound_button_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:data="@{model.states}"
+            app:itemDecoration="@{styles.itemDecoration}"
+            app:itemBinding="@{styles.itemBinding}">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </FrameLayout>
+
+</layout>

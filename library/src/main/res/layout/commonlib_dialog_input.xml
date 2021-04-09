@@ -13,6 +13,20 @@
         android:clipToPadding="false"
         android:padding="24dp">
 
+        <ImageView
+            android:id="@+id/dialog_icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="-24dp"
+            android:layout_marginStart="-24dp"
+            android:layout_marginEnd="-24dp"
+            android:visibility="gone"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            tools:visibility="visible"
+            tools:src="@drawable/shape_dialog_blue_button_nor_bg" />
 
         <TextView
             android:id="@+id/dialog_title"
@@ -46,6 +60,34 @@
             android:background="@drawable/commonlib_dialog_input_bg"
             android:orientation="horizontal"
             android:padding="12dp">
+
+            <com.xhb.uibase.widget.edittext.FloatInputLayout
+                android:id="@+id/floatInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:counterEnabled="true"
+                app:hintEnabled="false"
+                app:hintText="hint"
+                app:maxCounter="6">
+
+                <EditText
+                    android:id="@+id/dialog_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="start|top"
+                    android:inputType="text"
+                    android:maxLines="10"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp"
+                    android:textColor="@color/bluegrey_800"
+                    android:textColorHint="@color/bluegrey_500"
+                    android:textCursorDrawable="@drawable/shape_edit_text_cursor"
+                    android:textSize="16sp"
+                    tools:text="我是输入框我是输入框我是输入框我是输入框我是输入框我是输入框我是输入框我是输入框我是输入框我是输入框我是输入框我是输入框我是输入框" />
+
+            </com.xhb.uibase.widget.edittext.FloatInputLayout>
 
             <CheckBox
                 android:id="@+id/cb_pwd_display"

@@ -12,8 +12,10 @@
     </data>
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="@{value.inputType}"
+        android:textAppearance="@style/TextAppearance.XHB.Body.Middle"
         android:text="@={value.value}">
 
     </androidx.appcompat.widget.AppCompatEditText>

@@ -10,24 +10,25 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.xhb.uibase.binding.RecyclerViewAdapter;
 import com.xhb.uibase.demo.R;
 import com.xhb.uibase.demo.core.ComponentFragment;
 import com.xhb.uibase.demo.core.Layouts;
 import com.xhb.uibase.demo.core.ViewModel;
 import com.xhb.uibase.demo.core.ViewStyles;
-import com.xhb.uibase.demo.databinding.DialogsBinding;
-import com.xhb.uibase.demo.view.recycler.PaddingDecoration;
+import com.xhb.uibase.demo.databinding.DialogsFragmentBinding;
+import com.xhb.uibase.view.list.PaddingDecoration;
+import com.xhb.uibase.view.list.RecyclerViewAdapter;
 
 import java.util.Map;
 
-public class DialogsFragment extends ComponentFragment<DialogsBinding, DialogsFragment.Model, DialogsFragment.Style>
+public class DialogsFragment extends ComponentFragment<DialogsFragmentBinding, DialogsFragment.Model, DialogsFragment.Styles>
         implements View.OnClickListener {
 
     private static final String TAG = "DialogsFragment";
 
     public static class Model extends ViewModel {
-        private Map<String, Integer> layouts;
+
+        private final Map<String, Integer> layouts;
 
         public Model(DialogsFragment fragment) {
             layouts = Layouts.dialogLayouts(fragment.getContext());
@@ -38,26 +39,23 @@ public class DialogsFragment extends ComponentFragment<DialogsBinding, DialogsFr
         }
     }
 
-    public static class Style extends ViewStyles {
-        public int itemLayout = R.layout.dialog_item;
+    public static class Styles extends ViewStyles {
+        public int itemBinding = R.layout.dialog_item;
         public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
     }
 
     // this should be in view model, but fragment may simplify things
-    public RecyclerViewAdapter.OnItemClickListener dialogClicked = new RecyclerViewAdapter.OnItemClickListener() {
-        @Override
-        public void onItemClick(int position, Object object) {
-            Log.d(TAG, "dialogClicked" + object);
-            Dialog dialog = new Dialog(DialogsFragment.this.getContext(), R.style.dialog);
-            try {
-                int layoutId = ((Map.Entry<String, Integer>) object).getValue();
-                View view = LayoutInflater.from(getActivity()).inflate(layoutId, null);
-                applyStyles(view);
-                dialog.setContentView(view);
-                dialog.show();
-            } catch (Throwable e) {
-                Log.w(TAG, "", e);
-            }
+    public RecyclerViewAdapter.OnItemClickListener<Map.Entry<String, Integer>> dialogClicked = (position, object) -> {
+        Log.d(TAG, "dialogClicked" + object);
+        Dialog dialog = new Dialog(DialogsFragment.this.getContext(), 0);
+        try {
+            int layoutId = object.getValue();
+            View view = LayoutInflater.from(getActivity()).inflate(layoutId, null);
+            applyStyles(view);
+            dialog.setContentView(view);
+            dialog.show();
+        } catch (Throwable e) {
+            Log.w(TAG, "", e);
         }
     };
 

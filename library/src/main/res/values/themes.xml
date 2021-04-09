@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.XHB" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+
+        <item name="android:textViewStyle">@style/AppCompatTextView</item>
+
+        <item name="buttonStyle">@style/XHBButton</item>
+        <item name="checkboxStyle">@style/XHBCheckBox</item>
+        <item name="radioButtonStyle">@style/XHBRadioButton</item>
+        <item name="switchStyle">@style/XHBSwitchButton</item>
+        <item name="tipViewStyle">@style/XHBTipView</item>
+        <item name="dropDownStyle">@style/XHBDropDown</item>
+        <item name="lineIndicatorStyle">@style/XHBLineIndicator</item>
+        <item name="roundIndicatorStyle">@style/XHBRoundIndicator</item>
+        <item name="tabTitleStyle">@style/XHBTabTitleView</item>
+        <item name="tabNavigatorStyle">@style/XHBTabNavigator</item>
+        <item name="tabBarStyle">@style/XHBTabBar</item>
+        <item name="appTitleBarStyle">@style/XHBAppTitleBar</item>
+        <item name="panelStyle">@style/XHBPanel</item>
+        <item name="searchBoxStyle">@style/XHBSearchBox</item>
+        <item name="timePickerViewStyle">@style/XHBTimePickerView</item>
+
+        <!-- for day night inspect -->
+        <item name="viewInflaterClass">com.xhb.uibase.daynight.DayNightViewInflater</item>
+
+    </style>
+
+</resources>

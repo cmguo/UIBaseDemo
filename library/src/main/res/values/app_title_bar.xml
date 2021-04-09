@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="appTitleBarStyle" format="reference"/>
+
+    <dimen name="xhb_app_title_bar_height">48dp</dimen>
+    <dimen name="xhb_app_title_bar_padding">16dp</dimen>
+    <dimen name="xhb_app_title_bar_icon_padding">12dp</dimen>
+    <dimen name="xhb_app_title_bar_text_padding">20dp</dimen>
+    <!-- TODO: why can't use -->
+    <style name="xhb_app_title_bar_text_appearance">@style/TextAppearance.XHB.Head3</style>
+
+    <array name="xhb_app_title_button">
+        <item>@drawable/icon_minus</item>
+        <item>@string/app_name</item>
+    </array>
+
+    <declare-styleable name="XHBAppTitleBar">
+        <attr name="leftButton" format="reference"/>
+        <attr name="rightButton" format="reference"/>
+        <attr name="rightButton2" format="reference"/>
+        <attr name="icon"/>
+        <attr name="title" format="string"/>
+        <!-- not use android:textAppearance, since we not assign style value by default style,
+            then we will face app default textAppearance -->
+        <attr name="textAppearance" format="reference"/>
+        <attr name="content"/>
+    </declare-styleable>
+
+    <style name="XHBAppTitleBar">
+        <item name="android:minHeight">@dimen/xhb_app_title_bar_height</item>
+        <item name="android:maxHeight">@dimen/xhb_app_title_bar_height</item>
+        <item name="android:paddingLeft">@dimen/xhb_app_title_bar_padding</item>
+        <item name="android:paddingRight">@dimen/xhb_app_title_bar_padding</item>
+        <item name="android:background">@color/bluegrey_00</item>
+        <item name="leftButton">@drawable/icon_left</item>
+        <item name="rightButton">@drawable/icon_more</item>
+    </style>
+
+</resources>

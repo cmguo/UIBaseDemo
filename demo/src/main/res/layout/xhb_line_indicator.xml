@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:xhb="http://schemas.android.com/apk/com.xhb.uibase"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.xhb.uibase.demo.components.simple.XHBTabBarFragment.Styles" />
+
+        <variable
+            name="styles"
+            type="Styles" />
+
+    </data>
+
+    <com.xhb.uibase.widget.tabbar.XHBLineIndicator
+        android:id="@+id/lineIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        xhb:widthMode="{@styles.widthMode}"
+        xhb:lineWidth="@{styles.lineWidth}"
+        xhb:lineHeight="@{styles.lineHeight}"
+        xhb:offsetX="@{styles.offsetX}"
+        xhb:offsetY="@{styles.offsetY}"
+        />
+
+</layout>

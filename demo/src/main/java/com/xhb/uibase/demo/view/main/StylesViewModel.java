@@ -1,5 +1,6 @@
 package com.xhb.uibase.demo.view.main;
 
+import android.text.InputType;
 import android.util.Log;
 
 import androidx.databinding.BaseObservable;
@@ -10,8 +11,8 @@ import androidx.lifecycle.ViewModel;
 import com.xhb.uibase.demo.BR;
 import com.xhb.uibase.demo.R;
 import com.xhb.uibase.demo.core.ComponentFragment;
-import com.xhb.uibase.demo.core.ComponentStyle;
-import com.xhb.uibase.demo.core.ComponentStyles;
+import com.xhb.uibase.demo.core.style.ComponentStyle;
+import com.xhb.uibase.demo.core.style.ComponentStyles;
 import com.xhb.uibase.demo.core.ViewStyles;
 
 import java.util.ArrayList;
@@ -21,11 +22,12 @@ public class StylesViewModel extends ViewModel {
 
     private static final String TAG = "StylesViewModel";
 
-    public class StyleValue extends BaseObservable {
+    public static class StyleValue extends BaseObservable {
 
         ViewStyles styles;
         public ComponentStyle style;
-        public int itemLayout = R.layout.style_value_list_item;
+        public int itemLayout = R.layout.style_value_list_item; // for list values
+        public int inputType = 0; // for text values
         private String value;
 
         @Bindable(value = "value")
@@ -54,7 +56,7 @@ public class StylesViewModel extends ViewModel {
         }
 
         public void setValue(String value) {
-            if (value == this.value)
+            if (value.equals(this.value))
                 return;
             try {
                 style.set(styles, value);
@@ -72,15 +74,22 @@ public class StylesViewModel extends ViewModel {
 
     public MutableLiveData<List<StyleValue>> styleList = new MutableLiveData<>();
 
-    public void bindComponent(ComponentFragment fragment) {
+    public void bindComponent(ComponentFragment<?, ?, ?> fragment) {
+        if (fragment == null) {
+            styleList.postValue(new ArrayList<>());
+            return;
+        }
         ViewStyles styles = fragment.getStyles();
         ComponentStyles css = ComponentStyles.get(styles.getClass());
         List<StyleValue> list = new ArrayList<>();
         for (ComponentStyle cs : css.allStyles()) {
+            cs.init(styles);
             StyleValue sv = new StyleValue();
             sv.styles = styles;
             sv.style = cs;
             sv.value = cs.get(styles);
+            sv.inputType = Number.class.isAssignableFrom(cs.getValueType()) || cs.getValueType().isPrimitive()
+                ? InputType.TYPE_CLASS_NUMBER : InputType.TYPE_CLASS_TEXT;
             list.add(sv);
         }
         styleList.postValue(list);

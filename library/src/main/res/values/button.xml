@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="XHBButton">
+        <attr name="buttonType">
+            <enum name="primitive" value="0"/>
+            <enum name="secondary" value="1"/>
+            <enum name="tertiary" value="2"/>
+            <enum name="alert" value="3"/>
+            <enum name="text" value="4"/>
+        </attr>
+        <attr name="buttonSize">
+            <enum name="large" value="0"/>
+            <enum name="middle" value="1"/>
+            <enum name="small" value="2"/>
+            <enum name="thin" value="3"/>
+        </attr>
+        <attr name="content" format="reference" />
+        <attr name="icon" format="reference" />
+        <attr name="iconAtRight" format="boolean" />
+        <attr name="loadingDrawable" format="reference" />
+        <attr name="loadingText" format="reference|string" />
+        <attr name="buttonAppearance" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="XHBButton.Type">
+        <attr name="textColor"/>
+        <attr name="backgroundColor"/>
+    </declare-styleable>
+
+    <declare-styleable name="XHBButton.Size">
+        <attr name="height"/>
+        <attr name="borderRadius"/>
+        <attr name="paddingX"/>
+        <attr name="textSize"/>
+        <attr name="iconSize"/>
+        <attr name="iconPadding"/>
+    </declare-styleable>
+
+    <style name="XHBButton"><!-- parent="Widget.AppCompat.Button" TODO: erase shadow -->
+        <item name="android:textAppearance">@style/EmptyTextAppearance</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="loadingDrawable">@drawable/button_loading_primary_anim</item>
+        <item name="loadingText">"加载中..."</item>
+    </style>
+
+    <!-- Button Appearance Styles -->
+
+    <style name="XHBButton.Appearance">
+    </style>
+
+    <!-- Type Styles -->
+
+    <style name="XHBButton.Appearance.Primitive" parent="XHBButton.Appearance">
+        <item name="textColor">@color/bluegrey900_disabled</item>
+        <item name="backgroundColor">@color/brand500_pressed_disabled</item>
+    </style>
+
+    <style name="XHBButton.Appearance.Secondary" parent="XHBButton.Appearance">
+        <item name="textColor">@color/blue600_disabled</item>
+        <item name="backgroundColor">@color/blue100_pressed_disabled</item>
+    </style>
+
+    <style name="XHBButton.Appearance.Tertiary" parent="XHBButton.Appearance">
+        <item name="textColor">@color/bluegrey800_disabled</item>
+        <item name="backgroundColor">@color/bluegrey100_pressed_disabled</item>
+    </style>
+
+    <style name="XHBButton.Appearance.Danger" parent="XHBButton.Appearance">
+        <item name="textColor">@color/red600_disabled</item>
+        <item name="backgroundColor">@color/red100_pressed_disabled</item>
+    </style>
+
+    <style name="XHBButton.Appearance.Text" parent="XHBButton.Appearance">
+        <item name="textColor">@color/blue600_disabled</item>
+        <item name="backgroundColor">@color/transparent_pressed_disabled</item>
+    </style>
+
+    <!-- Size Styles -->
+
+    <style name="XHBButton.Appearance.Large" parent="XHBButton.Appearance">
+        <item name="height">44dp</item>
+        <item name="borderRadius">24dp</item>
+        <item name="paddingX">24dp</item>
+        <item name="textSize">18sp</item>
+        <item name="iconSize">20dp</item>
+        <item name="iconPadding">5dp</item>
+    </style>
+
+    <style name="XHBButton.Appearance.Middle" parent="XHBButton.Appearance">
+        <item name="height">36dp</item>
+        <item name="borderRadius">18dp</item>
+        <item name="paddingX">16dp</item>
+        <item name="textSize">16sp</item>
+        <item name="iconSize">18dp</item>
+        <item name="iconPadding">4dp</item>
+    </style>
+
+    <style name="XHBButton.Appearance.Small" parent="XHBButton.Appearance">
+        <item name="height">24dp</item>
+        <item name="borderRadius">12dp</item>
+        <item name="paddingX">12dp</item>
+        <item name="textSize">14sp</item>
+        <item name="iconSize">16dp</item>
+        <item name="iconPadding">3dp</item>
+    </style>
+
+    <style name="XHBButton.Appearance.Thin" parent="XHBButton.Appearance">
+        <item name="height">24dp</item>
+        <item name="borderRadius">0dp</item>
+        <item name="paddingX">0dp</item>
+        <item name="textSize">14sp</item>
+        <item name="iconSize">16dp</item>
+        <item name="iconPadding">3dp</item>
+    </style>
+
+</resources>

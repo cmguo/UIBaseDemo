@@ -1,5 +1,6 @@
 package com.xhb.uibase.app;
 
+import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SubMenu;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,12 +30,13 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.xhb.uibase.daynight.DayNightManager;
+import com.xhb.uibase.demo.view.GridDrawable;
 import com.xhb.uibase.demo.view.main.InformationFragment;
 import com.xhb.uibase.demo.view.main.StylesFragment;
 import com.xhb.uibase.demo.core.Component;
 import com.xhb.uibase.demo.core.ComponentFragment;
 import com.xhb.uibase.demo.core.Components;
-import com.xhb.uibase.demo.core.SkinManager;
 
 import java.util.List;
 import java.util.Map;
@@ -48,6 +49,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
 
     private Fragment informationFragment;
     private Fragment stylesFragment;
+    private GridDrawable gridDrawable = new GridDrawable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +58,9 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction()
-                        .show(stylesFragment)
-                        .commitNow();
-            }
-        });
+        fab.setOnClickListener(view -> getSupportFragmentManager().beginTransaction()
+                .show(stylesFragment)
+                .commitNow());
         Map<Integer, List<Component>> components = Components.collectComponents();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -83,6 +80,13 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
         componentFragment.getChildFragmentManager().addOnBackStackChangedListener(this);
         informationFragment = getSupportFragmentManager().findFragmentById(R.id.information_fragment);
         stylesFragment = getSupportFragmentManager().findFragmentById(R.id.styles_fragment);
+        findViewById(R.id.component_fragment).setBackground(gridDrawable);
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        findViewById(android.R.id.content).dispatchConfigurationChanged(newConfig);
     }
 
     private static final Rect RECT = new Rect();
@@ -119,16 +123,19 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_activity2, menu);
+        menu.findItem(R.id.action_skin_dark).setChecked(DayNightManager.getInstance().isNightMode());
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_skin_normal) {
-            SkinManager.switchMode(false);
+        if (item.getItemId() == R.id.action_back_grid) {
+            item.setChecked(!item.isChecked());
+            gridDrawable.setGridOn(item.isChecked());
             return true;
         } else if (item.getItemId() == R.id.action_skin_dark) {
-            SkinManager.switchMode(true);
+            item.setChecked(!item.isChecked());
+            DayNightManager.getInstance().setDayNightModel(item.isChecked());
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -143,9 +150,9 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
 
     private void buildNavMenu(Menu menu, Map<Integer, List<Component>> components) {
         for (Map.Entry<Integer, List<Component>> g : components.entrySet()) {
-            SubMenu sm = menu.addSubMenu(g.getKey());
+            SubMenu sm = menu.addSubMenu(0, g.getKey(), 0, g.getKey());
             for (Component c : g.getValue()) {
-                Log.d(TAG, "buildNavMenu id=" + c.id() + ", title=" + c.title());
+                Log.d(TAG, "buildNavMenu id=" + c.id() + ", title=" + c.title() + ", icon=" + c.icon());
                 sm.add(0, c.id(), 0, c.title()).setIcon(c.icon());
             }
         }
@@ -201,16 +208,14 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
         Fragment componentFragment = getSupportFragmentManager().findFragmentById(R.id.component_fragment);
         List<Fragment> fragments = ((NavHostFragment) componentFragment).getChildFragmentManager().getFragments();
         if (!fragments.isEmpty())
-            componentFragment = fragments.get(0);
+            componentFragment = fragments.get(fragments.size() - 1);
         if (componentFragment instanceof ComponentFragment) {
             ((InformationFragment) informationFragment).bindComponent((ComponentFragment) componentFragment);
             ((StylesFragment) stylesFragment).bindComponent((ComponentFragment) componentFragment);
+        } else {
+            ((InformationFragment) informationFragment).bindComponent(null);
+            ((StylesFragment) stylesFragment).bindComponent(null);
         }
-    }
-
-    @Override
-    public AppCompatDelegate getDelegate() {
-        return SkinManager.getDelegate(this);
     }
 
 }
